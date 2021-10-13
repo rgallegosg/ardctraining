@@ -12,10 +12,7 @@ import de.hybris.platform.servicelayer.search.SearchResult;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.log4j.Logger;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class DefaultCustomProductLabelDao implements CustomProductLabelDao {
 
@@ -43,6 +40,11 @@ public class DefaultCustomProductLabelDao implements CustomProductLabelDao {
         LOG.warn("unable to find result for customo product labels");
 
         return Collections.emptyList();
+    }
+
+    @Override
+    public List<CustomProductLabelModel> findExpired(Date now) {
+        return null;
     }
 
     public FlexibleSearchService getFlexibleSearchService() {

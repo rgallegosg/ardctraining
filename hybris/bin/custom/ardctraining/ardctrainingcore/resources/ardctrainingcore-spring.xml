@@ -556,5 +556,41 @@
 	<bean id="defaultCustomProductLabelService" class="com.ardctraining.core.product.service.impl.DefaultCustomProductLabelService">
 		<property name="customProductLabelDao" ref="customProductLabelDao" />
 	</bean>
+
+	<alias name="defaultCustomProductLabelCleanupJobPerformable" alias="customProductLabelCleanupJobPerformable" />
+	<bean id="defaultCustomProductLabelCleanupJobPerformable" class="com.ardctraining.core.job.CustomProductLabelCleanupJobPerformable" parent="abstractJobPerformable">
+		<property name="customProductLabelService" ref="customProductLabelService" />
+	</bean>
+
+	<bean id="customerFeedBackStatusHandler" class="com.ardctraining.core.handlers.CustomerFeedBackStatusHandler" >
+        <property name="configurationService" ref="configurationService" />
+
+    </bean>
+
+	<alias name="defaultCustomerFeedbackDao" alias="customerFeedbackDao" />
+	<bean id="defaultCustomerFeedbackDao" class="com.ardctraining.core.feedback.dao.impl.DefaultCustomerFeedbackDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="userService" ref="userService" />
+		<property name="modelService" ref="modelService" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<alias name="defaultCustomerFeedbackService" alias="customerFeedbackService" />
+	<bean id="defaultCustomerFeedbackService" class="com.ardctraining.core.feedback.service.impl.DefaultCustomerFeedbackService">
+		<property name="customerFeedbackDao" ref="customerFeedbackDao" />
+		<property name="userService" ref="userService" />
+		<property name="timeService" ref="timeService" />
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+	</bean>
+
+	<bean id="customerFeedbackEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/ardctrainingcore/processes/sendCustomerFeedbackEmailProcess.xml"/>
+	</bean>
+
+	<bean id="generateCustomerFeedbackEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="CustomerFeedbackEmailTemplate" />
+	</bean>
 	<!-- END custom beans -->
 </beans>

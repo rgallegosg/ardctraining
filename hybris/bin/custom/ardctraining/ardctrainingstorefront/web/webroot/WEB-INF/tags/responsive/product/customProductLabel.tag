@@ -6,7 +6,7 @@
 <div class="product-details__product-custom-labels">
     <c:forEach items="${customLabels}" var="label">
         <c:set var="labelType" value="primary" />
-        <c:if test="${item.type ne null}">
+        <c:if test="${label.type ne null}">
             <c:set var="labelType" value="${label.type}" />
         </c:if>
         <span class="product-details__product-custom-labels__item label ${labelType}">${label.label}</span>
